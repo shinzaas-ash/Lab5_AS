@@ -65,7 +65,24 @@ else:
 
 #  Part 3: Optional
 #  Use matplotlib to make a map of your census tracts with the average NDVI values
-importlib.reload(l5)
+
+import os
+import sys
+
+# Point Python to the correct directory
+sys.path.insert(0, r"R:\2026\Spring\GEOG562\Students\shinzaas\Lab5_AS\lab5_code")
+os.chdir(r"R:\2026\Spring\GEOG562\Students\shinzaas\Lab5_AS\lab5_code")
+
+# Confirm it's there
+print(os.listdir())  # AS_lab5_functions.py should appear in this list
+
+# Clear and reimport
+if 'AS_lab5_functions' in sys.modules:
+    del sys.modules['AS_lab5_functions']
+
+# Call function to make map of NDVI by census tract
+import AS_lab5_functions as l5
+smart_vector = l5.SmartVectorLayer('Benton_parcels_plusNDVI.shp')
 
 ok = smart_vector.map_ndvi(
     ndvi_field="NDVI_mean",
